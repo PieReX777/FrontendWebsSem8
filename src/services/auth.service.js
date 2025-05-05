@@ -52,4 +52,16 @@ api.interceptors.response.use(
   }
 );
 
+const AuthService = {
+  login: async (credentials) => {
+    return api.post('/auth/login', credentials);
+  },
+  register: async (userData) => {
+    return api.post('/auth/register', userData);
+  },
+  // otras funciones de autenticación...
+};
+
+export { AuthService };
+
 export default api;
