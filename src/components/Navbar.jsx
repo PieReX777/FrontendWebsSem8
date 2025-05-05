@@ -4,7 +4,18 @@ import { AppBar, Toolbar, Button, Typography } from '@mui/material';
 import { AuthService } from '../services/auth.service'; // <-- Agrega esta línea
 
 const Navbar = () => {
-  const user = AuthService.getCurrentUser();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Actualizar el estado del usuario al montar el componente
+    setUser(AuthService.getCurrentUser());
+  }, []);
+
+  const handleLogout = () => {
+    AuthService.logout();
+    setUser(null); // Actualizar el estado después de logout
+    window.location.href = '/login'; // Redirigir al login
+  };
   
   return (
     <AppBar position="static">

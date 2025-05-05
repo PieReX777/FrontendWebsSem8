@@ -59,7 +59,16 @@ const AuthService = {
   register: async (userData) => {
     return api.post('/auth/register', userData);
   },
-  // otras funciones de autenticación...
+  getCurrentUser: () => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  },
+  logout: () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    // Opcional: hacer una llamada al backend para invalidar el token
+    return Promise.resolve();
+  }
 };
 
 export { AuthService };
